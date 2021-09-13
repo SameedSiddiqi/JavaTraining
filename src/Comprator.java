@@ -1,6 +1,6 @@
-import java.util.*;  
+import java.util.*;
 
-class Student {    
+class Student implements Comparable<Student>{    
 	int rollno;    
 	String name;    
 	int age;  
@@ -29,15 +29,32 @@ class Student {
 	}  
 	public void setAge(int age) {  
 		this.age = age;  
+	}
+	
+	@Override
+	public int compareTo(Student o) {
+		/*
+		 * if (this.age>o.age) return 1; if (this.age==o.age) return 0; else { return
+		 * -1; }
+		 */
+	            return this.name.compareTo(o.name);			
+		
+		
 	}  
 }    
-public class Comprator {
+public class Comprator{
 
 	public static void main(String[] args) {
 		ArrayList<Student> al=new ArrayList<Student>();    
 		al.add(new Student(4,"Ali",32));    
 		al.add(new Student(2,"Usama",22));    
-		al.add(new Student(7,"Sameed",23));    
+		al.add(new Student(7,"Sameed",23));  
+		
+		Collections.sort(al);
+		for(Student a:al)
+		System.out.println(a.name);  
+		
+
 		Comparator<Student> cm1=Comparator.comparing(Student::getName);   //Comparing by name
 		Collections.sort(al,cm1);  
 		System.out.println("Comparing by name");
@@ -61,9 +78,8 @@ public class Comprator {
 		Collections.sort(al,cm2); 
 		System.out.println("comparing by age");
 		for(Student st: al){
-			 
 			System.out.println(st.rollno+" "+st.name+" "+st.age);  
-		}  
+		}
 	}    
 
 }

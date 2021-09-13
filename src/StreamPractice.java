@@ -52,7 +52,7 @@ public class StreamPractice {
 		 
 		Integer totalPrice = l1.stream()  
 				 .map(product->product.price)  
-				 .reduce((int) 0.0,(sum, price)->sum+price);        //Sum by reduce
+				 .reduce(0,(sum, price)->sum+price);        //Sum by reduce
 		 System.out.println(totalPrice);   
 		 
 		 float count = l1.stream()  
