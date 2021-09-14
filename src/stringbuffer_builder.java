@@ -16,8 +16,7 @@ public class stringbuffer_builder {
 		
 		System.out.println(str.reverse());
 		
-		
-		
+			
 		
 
 	}

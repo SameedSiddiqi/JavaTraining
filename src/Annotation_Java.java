@@ -27,7 +27,6 @@ public class Annotation_Java{
 
 		myclass h=new myclass();  
 		Method m=h.getClass().getMethod("Hello");  
-
 		CustomAnnotation manno=m.getAnnotation(CustomAnnotation.class);  
 		System.out.println("value is: "+manno.value());  
 	}
@@ -40,7 +39,7 @@ void eating(){System.out.println("eat");}
   
 class Cat extends Animal{  
 @Override  
-void Eating(){System.out.println("eat cat food");}              //if no @override, spelling mistake will be ignored
+void eating(){System.out.println("eat cat food");}              //if no @override, spelling mistake will be ignored
 }  
   
 class Test{  
