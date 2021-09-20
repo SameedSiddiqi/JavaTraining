@@ -3,13 +3,14 @@ package main.java.com.contoursoftware.lms.db.student.dao;
 import main.java.com.contoursoftware.lms.commons.db.dao.DataAccessObject;
 import main.java.com.contoursoftware.lms.db.student.dto.Student;
 
+import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class StudentDAO implements DataAccessObject<Student> {
 
-	 public static ArrayList<Student> student;
+	 public  ArrayList<Student> student;
 
 
 		public StudentDAO() {
@@ -48,6 +49,12 @@ public class StudentDAO implements DataAccessObject<Student> {
 	public void delete(Student obj) {
 		student.remove(obj.getRollno());
 		
+	}
+	
+	
+	public void assignBook(Student obj,List <Book> b)
+	{
+		student.get(obj.getRollno()).setMybook(b);
 	}
 	
 }

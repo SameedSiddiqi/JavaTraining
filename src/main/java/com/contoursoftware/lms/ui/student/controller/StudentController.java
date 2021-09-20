@@ -1,12 +1,12 @@
 package main.java.com.contoursoftware.lms.ui.student.controller;
 
+
 import main.java.com.contoursoftware.lms.db.student.dao.StudentDAO;
 import main.java.com.contoursoftware.lms.db.student.dto.Student;
 
 public class StudentController {
 	
 StudentDAO Dao = new StudentDAO();
-	
 	
     public void getAll(){
     	for (Student student : Dao.getAll()) {
@@ -17,6 +17,7 @@ StudentDAO Dao = new StudentDAO();
     public void Update(int id,String str){
     	
     	Student student =Dao.getAll().get(id);
+    	
 		Dao.update(student,str);
 		
     }
@@ -26,5 +27,10 @@ StudentDAO Dao = new StudentDAO();
     	Student student=Dao.getAll().get(id);
 		Dao.delete(student);
     }
+    
+    public void getOne(int obj)
+    {
+    	System.out.println("Student: [ID : " + Dao.getOne(obj).getRollno() + ", Name : " +  Dao.getOne(obj).getName() +", Author : " +  Dao.getOne(obj).getDepartment() + " : Books: Null "+ " ]");
+    }	
     
 }

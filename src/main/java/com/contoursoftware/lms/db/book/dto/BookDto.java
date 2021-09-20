@@ -1,17 +1,19 @@
 package main.java.com.contoursoftware.lms.db.book.dto;
 
-public class Book {
+public class BookDto {
 
 		private String name;
-		private int id;
+		private int  id;
 		private String author;
 		private String category;
+		private int quantity;
 		
-		public Book(String name, int id, String author, String category) {
+		public BookDto(String name, int id, String author, String category,int quantity) {
 			this.name = name;
 			this.id = id;
 			this.author = author;
 			this.category = category;
+			this.quantity=quantity;
 		}
 		
 		public String getName() {
@@ -38,6 +40,21 @@ public class Book {
 		public void setCategory(String category) {
 			this.category = category;
 		}
+
+		public int getQuantity() {
+			return quantity;
+		}
+
+		public void setQuantity(int quantity) {
+			this.quantity = quantity;
+		}
+
+		@Override
+		public String toString() {
+			return "BookDto [name=" + name + ", id=" + id + ", author=" + author + ", category=" + category
+					+ ", quantity=" + quantity + "]";
+		}
+
 		
 	}
 
