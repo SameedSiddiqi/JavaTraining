@@ -27,6 +27,9 @@ public class BookDto {
 			this.copies=copies;
 		}
 		
+		public BookDto() {
+		}
+
 		public String getTitle() {
 			return title;
 		}

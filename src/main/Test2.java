@@ -44,35 +44,37 @@ public class Test2 {
 
 
 
-		AdminDeleteBook adminDeleteBook=new AdminDeleteBook(); //Delete by name
-		BookDto d1=new BookDto(1,null, null, null, 0);
-		adminDeleteBook.performAction(d1);
-		System.out.println(adminGetBook.performAction());
+		
 
 		AdminUpdateBook adminUpdateBook=new AdminUpdateBook(); 
 		BookDto u1=new BookDto(3, null, null, Category.Love, 0);
 		adminUpdateBook.performAction(u1);
 		System.out.println(adminGetBook.performAction());
+		
+		AdminDeleteBook adminDeleteBook=new AdminDeleteBook(); //Delete by name
+		BookDto d1=new BookDto(1,null, null, null, 0);
+		adminDeleteBook.performAction(d1);
+		System.out.println(adminGetBook.performAction());
 
-		SearchBook searchBook=new SearchBook();
-		System.out.println(searchBook.performNewAction("Java"));
+		//SearchBook searchBook=new SearchBook();
+		//System.out.println(searchBook.performNewAction("Java"));
 		
 		
-		CustomerDto student=new CustomerDto(0, "Sameed", "Peshawar", "03361930015", "sameed@gmail.com", "sameed123");
-		CustomerDto student1=new CustomerDto(1, "Talha", "Lahore", "03151930015", "talha@gmail.com", "talha123");
-		CustomerDto student2=new CustomerDto(2, "khalid", "Karachi", "03231930015", "khalid@gmail.com", "khalid123");
-		AddCustomer addStudent=new AddCustomer();
-		addStudent.performAction(student);
-		addStudent.performAction(student1);
-		addStudent.performAction(student2);
-		
-		GetAllCustomer getAllCustomer=new GetAllCustomer();
-		System.out.println(getAllCustomer.performAction());
-		
-		DeleteCustomer deleteCustomer=new DeleteCustomer();
-		CustomerDto sd1=new CustomerDto(1, null, null, null, null, null);
-		deleteCustomer.performAction(sd1);
-		System.out.println(getAllCustomer.performAction());
+//		CustomerDto student=new CustomerDto(0, "Sameed", "Peshawar", "03361930015", "sameed@gmail.com", "sameed123");
+//		CustomerDto student1=new CustomerDto(1, "Talha", "Lahore", "03151930015", "talha@gmail.com", "talha123");
+//		CustomerDto student2=new CustomerDto(2, "khalid", "Karachi", "03231930015", "khalid@gmail.com", "khalid123");
+//		AddCustomer addStudent=new AddCustomer();
+//		addStudent.performAction(student);
+//		addStudent.performAction(student1);
+//		addStudent.performAction(student2);
+//		
+//		GetAllCustomer getAllCustomer=new GetAllCustomer();
+//		System.out.println(getAllCustomer.performAction());
+//		
+//		DeleteCustomer deleteCustomer=new DeleteCustomer();
+//		CustomerDto sd1=new CustomerDto(1, null, null, null, null, null);
+//		deleteCustomer.performAction(sd1);
+//		System.out.println(getAllCustomer.performAction());
 
 
 		//		AdminDto myadmin = new AdminDto(0, "Sammed Siddiqi", "sameed123@gmail.com", "sameed123");

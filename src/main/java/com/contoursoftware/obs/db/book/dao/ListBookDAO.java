@@ -1,45 +1,45 @@
-package main.java.com.contoursoftware.obs.db.customer.dao;
+package main.java.com.contoursoftware.obs.db.book.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import main.java.com.contoursoftware.obs.commons.db.dao.DataAccessObject;
-import main.java.com.contoursoftware.obs.db.customer.dto.CustomerDto;
+import main.java.com.contoursoftware.obs.db.book.dto.BookDto;
 
-public class CustomerDAO implements DataAccessObject<CustomerDto> {
+public class ListBookDAO implements DataAccessObject<BookDto> {
 	
-	public  static ArrayList<CustomerDto> arrayList = new ArrayList<CustomerDto>();
+	public  static ArrayList<BookDto> arrayList = new ArrayList<BookDto>();
 	
 	@Override
-	public void add(CustomerDto obj) {
+	public void add(BookDto obj) {
 		arrayList.add(obj);
-		System.out.println("Customer Added");
+		System.out.println("Book Added");
 		
 	}
 
 	@Override
-	public List<CustomerDto> getAll() {
+	public List<BookDto> getAll() {
 		
 		return arrayList;
 	}
 
 	@Override
-	public void update(CustomerDto obj) {
-//		for(CustomerDto array:arrayList)
-//		{
-//			if (array.getId()==obj.getId()) {
-//				array.setDepartment(obj.getDepartment());
-//			     break;
-//			}
-//					
-//		}
+	public void update(BookDto obj) {
+		for(BookDto array:arrayList)
+		{
+			if (array.getId()==obj.getId()) {
+				array.setCategory(obj.getCategory());
+			     break;
+			}
+					
+		}
 		
 	}
 
 	@Override
-	public void delete(CustomerDto obj) {
-		CustomerDto result = null;
-		for(CustomerDto array:arrayList)
+	public void delete(BookDto obj) {
+		BookDto result = null;
+		for(BookDto array:arrayList)
 		{
 			if (array.getId()==obj.getId())
 				result=array;
@@ -52,7 +52,7 @@ public class CustomerDAO implements DataAccessObject<CustomerDto> {
 //
 //
 //	@Override
-//	public void add(StudentDto obj) {
+//	public void add(BookDto obj) {
 //		super.add(obj);
 //		
 //	}
@@ -64,7 +64,7 @@ public class CustomerDAO implements DataAccessObject<CustomerDto> {
 //	}
 //
 //	@Override
-//	public StudentDto getOne(String name) {
+//	public BookDto getOne(String name) {
 //		// TODO Auto-generated method stub
 //		return super.getOne(name);
 //	}
@@ -82,7 +82,7 @@ public class CustomerDAO implements DataAccessObject<CustomerDto> {
 //	}
 //
 //	@Override
-//	public List<StudentDto> getAll() {
+//	public List<BookDto> getAll() {
 //		return super.getAll();
 //		// TODO Auto-generated method stub
 //		

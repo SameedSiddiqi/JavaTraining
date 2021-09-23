@@ -2,13 +2,13 @@ package main.java.com.contoursoftware.obs.service.impl;
 
 import java.util.List;
 
-import main.java.com.contoursoftware.obs.db.customer.dao.CustomerDAO;
+import main.java.com.contoursoftware.obs.db.customer.dao.ListCustomerDAO;
 import main.java.com.contoursoftware.obs.db.customer.dto.CustomerDto;
 
 
 public class CustomerService {
  
-	 CustomerDAO studentDAO=new CustomerDAO();
+	 ListCustomerDAO studentDAO=new ListCustomerDAO();
 	 
 	 public void add(CustomerDto CustomerDto)
 	 {
