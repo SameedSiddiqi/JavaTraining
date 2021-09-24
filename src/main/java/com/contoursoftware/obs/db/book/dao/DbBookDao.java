@@ -3,7 +3,7 @@ package main.java.com.contoursoftware.obs.db.book.dao;
 import java.util.ArrayList;
 
 import java.util.List;
-
+import java.util.Stack;
 import java.sql.Connection;
 
 import java.sql.PreparedStatement;
@@ -13,10 +13,11 @@ import java.sql.Statement;
 
 import main.java.com.contoursoftware.obs.commons.db.config.DatabaseConnection;
 import main.java.com.contoursoftware.obs.commons.db.dao.DataAccessObject;
+import main.java.com.contoursoftware.obs.commons.utils.Searchable;
 import main.java.com.contoursoftware.obs.db.book.dto.BookDto;
-import main.java.com.contoursoftware.obs.db.book.dto.BookDto.Category;
 
-public class DbBookDao implements DataAccessObject<BookDto> {
+
+public class DbBookDao implements DataAccessObject<BookDto>,Searchable<BookDto> {
 
 	Connection connection = DatabaseConnection.getConnection();
 
@@ -26,7 +27,7 @@ public class DbBookDao implements DataAccessObject<BookDto> {
 		book.setId( rs.getInt("id") );
 		book.setTitle( rs.getString("title") );
 		book.setAuthor( rs.getString("author") );
-		book.setCategory(Category.valueOf(rs.getString("category")));
+		//book.setCategory(Category.valueOf(rs.getString("category")));
 
 		return book;
 	}
@@ -60,11 +61,10 @@ public class DbBookDao implements DataAccessObject<BookDto> {
 	@Override
 	public void add(BookDto obj) {
 		try {
-			PreparedStatement ps = connection.prepareStatement("INSERT INTO book VALUES (default, ?, ?, ?,?)");
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO book VALUES (default, ?, ?,?)");
 			ps.setString(1, obj.getTitle());
 			ps.setString(2, obj.getAuthor());
-			ps.setString(3, obj.getCategory().name());
-			ps.setInt(4, obj.getCopies());
+			ps.setInt(3, obj.getCopies());
 
 			int i = ps.executeUpdate();
 
@@ -98,8 +98,10 @@ public class DbBookDao implements DataAccessObject<BookDto> {
 			}
 
 			return books;
+			
+		}
 
-		} catch (SQLException ex) {
+		 catch (SQLException ex) {
 			ex.printStackTrace();
 		}
 
@@ -109,8 +111,8 @@ public class DbBookDao implements DataAccessObject<BookDto> {
 	@Override
 	public void update(BookDto obj) {
 		try {
-			PreparedStatement ps = connection.prepareStatement("UPDATE book SET category=? WHERE id=?");
-			ps.setString(1, obj.getCategory().name());
+			PreparedStatement ps = connection.prepareStatement("UPDATE book SET author=? WHERE id=?");
+			ps.setString(1, obj.getAuthor());
 			ps.setInt(2, obj.getId());
 			int i = ps.executeUpdate();
 
@@ -147,5 +149,19 @@ public class DbBookDao implements DataAccessObject<BookDto> {
 			}
 		}
 
+	@Override
+	public BookDto search(List<BookDto> obj, BookDto obj1) {
+
+		for (BookDto book:obj)
+		{
+			if(book.getTitle().equals(obj1.getTitle()) && book.getAuthor().equals(obj1.getAuthor()))
+				return null;
+							
+		}
+		return obj1;
 	}
+
+
+	}
+	
 

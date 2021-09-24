@@ -2,8 +2,10 @@ package main.java.com.contoursoftware.obs.db.book.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import main.java.com.contoursoftware.obs.commons.db.dao.DataAccessObject;
+import main.java.com.contoursoftware.obs.commons.utils.Searchable;
 import main.java.com.contoursoftware.obs.db.book.dto.BookDto;
 
 public class ListBookDAO implements DataAccessObject<BookDto> {
@@ -48,6 +50,8 @@ public class ListBookDAO implements DataAccessObject<BookDto> {
 		arrayList.remove(result);
 		
 	}
+
+
 
 //
 //

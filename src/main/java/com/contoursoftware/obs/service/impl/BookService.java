@@ -37,35 +37,30 @@ import java.util.List;
 import main.java.com.contoursoftware.obs.db.book.dao.DbBookDao;
 import main.java.com.contoursoftware.obs.db.book.dao.ListBookDAO;
 import main.java.com.contoursoftware.obs.db.book.dto.BookDto;
+import main.java.com.contoursoftware.obs.db.category.dao.DbBookCategoryDao;
 
 public class BookService {
  
 	 DbBookDao dbBookDAO=new DbBookDao();
+	 DbBookCategoryDao bookCategory=new  DbBookCategoryDao();
 	 
 	 public void add(BookDto bookDto)
-	 {
-//		 List<BookDto> newlist=new ArrayList<BookDto>();
-//		 newlist=dbBookDAO.getAll();
-//		 if (newlist.isEmpty())
-//		 {
-//			 dbBookDAO.add(bookDto);
-//		 }
-//		 else {
-//		 for (BookDto item : newlist)
-//		 {
-//			 System.out.println(item.getTitle());
-//			 if(item.getTitle()==bookDto.getTitle())
-//			 {
-//				 System.out.println("Multiple Books with same name cannot be added");
-//				 
-//			 }
-//			 else
-//			 {
-//				 dbBookDAO.add(bookDto);
-//			 }
-//		 }
-//		 }
-		 dbBookDAO.add(bookDto);
+	 { 
+		 List<BookDto> newlist=new ArrayList<BookDto>();
+		 newlist=dbBookDAO.getAll();	 
+		 if (newlist.isEmpty()) {
+			 dbBookDAO.add(bookDto);
+			 bookCategory.add(bookDto);
+		 }
+		 else {
+                 BookDto b1=dbBookDAO.search(newlist,bookDto);
+                 if (b1!=null) {
+        			 dbBookDAO.add(bookDto);
+        			 bookCategory.add(bookDto);
+        			 }		     		 
+                 else
+                	 System.out.println("Multiple Books with same name cannot be added");         
+		 }
 	 }
 	 public void delete(BookDto bookDto)
 	 {
@@ -75,11 +70,19 @@ public class BookService {
 	 public List<BookDto> getBook()
 	 {
 		 
+		
 		return dbBookDAO.getAll();
 	 }
 	 
 	 public void update(BookDto bookDto)
 	 {
 		 dbBookDAO.update(bookDto);
+	 }
+	 
+	 public List<BookDto> getAllCategory()
+	 {
+		 
+		
+		return bookCategory.getAll();
 	 }
 }

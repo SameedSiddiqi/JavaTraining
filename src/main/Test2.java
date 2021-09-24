@@ -1,16 +1,19 @@
 package main;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import main.java.com.contoursoftware.obs.db.admin.dto.AdminDto;
 import main.java.com.contoursoftware.obs.db.book.dto.BookDto;
-import main.java.com.contoursoftware.obs.db.book.dto.BookDto.Category;
+
+import main.java.com.contoursoftware.obs.db.category.dto.CategoryDto;
 import main.java.com.contoursoftware.obs.db.customer.dto.CustomerDto;
 import main.java.com.contoursoftware.obs.ui.admin.controller.AdminAddBook;
 import main.java.com.contoursoftware.obs.ui.admin.controller.AdminDeleteBook;
 import main.java.com.contoursoftware.obs.ui.admin.controller.AdminGetBook;
+import main.java.com.contoursoftware.obs.ui.admin.controller.AdminGetCategory;
 import main.java.com.contoursoftware.obs.ui.admin.controller.AdminUpdateBook;
 import main.java.com.contoursoftware.obs.ui.admin.controller.SearchBook;
 import main.java.com.contoursoftware.obs.ui.student.controller.AddCustomer;
@@ -20,22 +23,44 @@ import main.java.com.contoursoftware.obs.ui.student.controller.GetAllCustomer;
 
 public class Test2 {
 
-	public static void main(String[] args) {
+	
 
-		BookDto addBook=new BookDto(0, "Java", "Lewandoski", Category.Education, 1);
-		BookDto addBook1=new BookDto( 1,"Python", "Sane", Category.Education, 1);
-		BookDto addBook2=new BookDto(2,"Avengers",  "Ruso Brothers", Category.Fantasy, 1);
-		BookDto addBook3=new BookDto(3, "Friends",  "Sahir Lodhi", Category.Comic, 1);
+	public static void main(String[] args) {
+		List<CategoryDto> list=new ArrayList<CategoryDto>();
+		CategoryDto categorydto1 =new CategoryDto(1, "Action");
+		CategoryDto categorydto2 =new CategoryDto(2, "Adventure");
+		CategoryDto categorydto3 =new CategoryDto(3, "Autobiography");
+		
+		
+		list.add(categorydto1);
+		list.add(categorydto2);
+		list.add(categorydto3);
+		
+		BookDto addBook=new BookDto(0, "Java", "Lewandoski",list, 1);
+		BookDto addBook1=new BookDto( 1,"Python", "Sane", list, 1);
+		BookDto addBook2=new BookDto(2,"Avengers",  "Ruso Brothers", list, 1);
+		BookDto addBook3=new BookDto(3, "Friends",  "Sahir Lodhi", list, 1);
 		AdminAddBook adminAddBook=new AdminAddBook();
 		adminAddBook.performAction(addBook);
 		adminAddBook.performAction(addBook1);
 		adminAddBook.performAction(addBook2);
 		adminAddBook.performAction(addBook3);
-
-
+		
 		AdminGetBook adminGetBook = new AdminGetBook();
 		System.out.println("Getting All Books");
 		System.out.println(adminGetBook.performAction());
+		
+		AdminUpdateBook adminUpdateBook=new AdminUpdateBook(); 
+		BookDto u1=new BookDto(3, null,"sameed", null, 0);
+		adminUpdateBook.performAction(u1);
+		System.out.println(adminGetBook.performAction());
+		
+		
+		
+		AdminGetCategory admingetCategory = new AdminGetCategory();
+		System.out.println(admingetCategory.performAction());
+		
+		 
 
 
 		//List<BookDto> l2 = adminGetBook.performAction().stream().filter(p -> p.getName().equals("Python")).collect(Collectors.toList());
@@ -46,11 +71,6 @@ public class Test2 {
 
 		
 
-		AdminUpdateBook adminUpdateBook=new AdminUpdateBook(); 
-		BookDto u1=new BookDto(3, null, null, Category.Love, 0);
-		adminUpdateBook.performAction(u1);
-		System.out.println(adminGetBook.performAction());
-		
 		AdminDeleteBook adminDeleteBook=new AdminDeleteBook(); //Delete by name
 		BookDto d1=new BookDto(1,null, null, null, 0);
 		adminDeleteBook.performAction(d1);

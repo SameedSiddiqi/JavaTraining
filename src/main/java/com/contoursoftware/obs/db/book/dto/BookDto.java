@@ -1,25 +1,21 @@
 package main.java.com.contoursoftware.obs.db.book.dto;
 
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import main.java.com.contoursoftware.obs.db.category.dto.CategoryDto;
+
 public class BookDto {
-	
-	public enum Category{
-		Action,
-		Adventure,
-		Comic,
-		Education,
-		Fantasy,
-		History,
-		Horror,
-		Love
-	}
 	
 	    private int  id;
 		private String title;
 		private String author;
-		private Category category;
+		private List<CategoryDto> category; 
 		private int copies;
 		
-		public BookDto(int id,String title, String author, Category category,int copies) {
+		public BookDto(int id,String title, String author, List<CategoryDto> category,int copies) {
 			this.title = title;
 			this.id = id;
 			this.author = author;
@@ -27,7 +23,16 @@ public class BookDto {
 			this.copies=copies;
 		}
 		
+		public List<CategoryDto> getCategory() {
+			return category;
+		}
+
+		public void setCategory(List<CategoryDto> category) {
+			this.category = category;
+		}
+
 		public BookDto() {
+			
 		}
 
 		public String getTitle() {
@@ -48,13 +53,7 @@ public class BookDto {
 		public void setAuthor(String author) {
 			this.author = author;
 		}
-		public Category getCategory() {
-			return category;
-		}
-		public void setCategory(Category category) {
-			this.category = category;
-		}
-
+	
 		public int getCopies() {
 			return copies;
 		}
