@@ -1,5 +1,9 @@
 package main.java.com.contoursoftware.obs.db.customer.dto;
 
+import java.util.List;
+
+import main.java.com.contoursoftware.obs.db.book.dto.BookDto;
+
 public class CustomerDto {
 	
 	private int id;
@@ -8,10 +12,20 @@ public class CustomerDto {
 	private String contact_no;
 	private String email;
 	private String password;
+	private List<BookDto> book;
 	
+	public CustomerDto(int id, String name, String address, String contact_no, String email, String password,
+			List<BookDto> book) {
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.contact_no = contact_no;
+		this.email = email;
+		this.password = password;
+		this.book = book;
+	}
 	
 	public CustomerDto(int id, String name,String address, String contact_no, String email, String password) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.address = address;
@@ -21,6 +35,19 @@ public class CustomerDto {
 	}
 	
 	
+	public CustomerDto() {
+		// TODO Auto-generated constructor stub
+	}
+
+	
+	public List<BookDto> getBook() {
+		return book;
+	}
+
+	public void setBook(List<BookDto> book) {
+		this.book = book;
+	}
+
 	public int getId() {
 		return id;
 	}

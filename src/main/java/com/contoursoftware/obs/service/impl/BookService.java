@@ -46,22 +46,17 @@ public class BookService {
 	 
 	 public void add(BookDto bookDto)
 	 { 
-		 List<BookDto> newlist=new ArrayList<BookDto>();
-		 newlist=dbBookDAO.getAll();	 
-		 if (newlist.isEmpty()) {
-			 dbBookDAO.add(bookDto);
-			 bookCategory.add(bookDto);
-		 }
-		 else {
-                 BookDto b1=dbBookDAO.search(newlist,bookDto);
-                 if (b1!=null) {
+
+                 int b1=dbBookDAO.countByCriteria(bookDto);
+                 System.out.println("b1 "+b1);
+                 if (b1==0) {
         			 dbBookDAO.add(bookDto);
         			 bookCategory.add(bookDto);
         			 }		     		 
                  else
                 	 System.out.println("Multiple Books with same name cannot be added");         
 		 }
-	 }
+
 	 public void delete(BookDto bookDto)
 	 {
 		 dbBookDAO.delete(bookDto);

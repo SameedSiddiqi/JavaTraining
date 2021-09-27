@@ -19,6 +19,7 @@ import main.java.com.contoursoftware.obs.ui.admin.controller.SearchBook;
 import main.java.com.contoursoftware.obs.ui.student.controller.AddCustomer;
 import main.java.com.contoursoftware.obs.ui.student.controller.DeleteCustomer;
 import main.java.com.contoursoftware.obs.ui.student.controller.GetAllCustomer;
+import main.java.com.contoursoftware.obs.ui.student.controller.OrderBook;
 
 
 public class Test2 {
@@ -60,22 +61,45 @@ public class Test2 {
 		AdminGetCategory admingetCategory = new AdminGetCategory();
 		System.out.println(admingetCategory.performAction());
 		
-		 
-
-
-		//List<BookDto> l2 = adminGetBook.performAction().stream().filter(p -> p.getName().equals("Python")).collect(Collectors.toList());
-		//BookDto[] array = l2.toArray(new BookDto()[l2.size()]);
-		//Object[] o = l2.toArray();
-
-
-
 		
 
 		AdminDeleteBook adminDeleteBook=new AdminDeleteBook(); //Delete by name
 		BookDto d1=new BookDto(1,null, null, null, 0);
 		adminDeleteBook.performAction(d1);
 		System.out.println(adminGetBook.performAction());
+		
 
+		CustomerDto customer=new CustomerDto(0, "Sameed", "Peshawar", "03361930015", "sameed@gmail.com", "sameed123");
+		CustomerDto customer1=new CustomerDto(1, "Talha", "Lahore", "03151930015", "talha@gmail.com", "talha123");
+		CustomerDto customer2=new CustomerDto(2, "khalid", "Karachi", "03231930015", "khalid@gmail.com", "khalid123");
+		AddCustomer addStudent=new AddCustomer();
+		addStudent.performAction(customer);
+		addStudent.performAction(customer1);
+		addStudent.performAction(customer2);
+		addStudent.performAction(customer1);
+		
+		GetAllCustomer getAllCustomer=new GetAllCustomer();
+		System.out.println(getAllCustomer.performAction());
+		
+		
+		DeleteCustomer deleteCustomer=new DeleteCustomer();
+		CustomerDto sd1=new CustomerDto(1, null, null, null, null, null);
+		deleteCustomer.performAction(sd1);
+		System.out.println(getAllCustomer.performAction());
+		
+		OrderBook orderbook=new OrderBook();
+		List<BookDto> list11=new ArrayList<BookDto>();
+		list11.add(addBook2);
+		CustomerDto customer11=new CustomerDto(1, "Talha", "Lahore", "03151930015", "talha@gmail.com", "talha123",list11);
+		orderbook.performAction(customer11);
+		
+		
+
+
+		//List<BookDto> l2 = adminGetBook.performAction().stream().filter(p -> p.getName().equals("Python")).collect(Collectors.toList());
+		//BookDto[] array = l2.toArray(new BookDto()[l2.size()]);
+		//Object[] o = l2.toArray();
+		
 		//SearchBook searchBook=new SearchBook();
 		//System.out.println(searchBook.performNewAction("Java"));
 		

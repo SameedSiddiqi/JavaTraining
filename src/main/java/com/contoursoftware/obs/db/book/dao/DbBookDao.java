@@ -65,7 +65,7 @@ public class DbBookDao implements DataAccessObject<BookDto>,Searchable<BookDto> 
 			ps.setString(1, obj.getTitle());
 			ps.setString(2, obj.getAuthor());
 			ps.setInt(3, obj.getCopies());
-
+//Saving 
 			int i = ps.executeUpdate();
 
 			if(i == 1) {
@@ -150,16 +150,65 @@ public class DbBookDao implements DataAccessObject<BookDto>,Searchable<BookDto> 
 		}
 
 	@Override
-	public BookDto search(List<BookDto> obj, BookDto obj1) {
-
-		for (BookDto book:obj)
-		{
-			if(book.getTitle().equals(obj1.getTitle()) && book.getAuthor().equals(obj1.getAuthor()))
-				return null;
-							
-		}
-		return obj1;
+	public int countByCriteria(BookDto obj) {
+		int j=0;
+				try {
+					Statement stmt1 = connection.createStatement();
+					ResultSet rs1 = stmt1.executeQuery("SELECT count(*) FROM book where title='"    +  obj.getTitle() + "' and author='"    +  obj.getAuthor() + "'  ");
+					rs1.next();
+					
+					 j=rs1.getInt(1);
+					 return j;	
+				}
+				catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+		 
+		
+		return j;
+		
 	}
+
+	public void orderDetail(int id, BookDto obj) {
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT id FROM book where title= '"   +  obj.getTitle() + "'");
+			rs.next();
+			int b_id=rs.getInt("id");
+			
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO order_detail VALUES (?, ?, ?,?)");
+			ps.setInt(1, id);
+			ps.setInt(2, b_id);
+			ps.setString(3, obj.getTitle());
+			ps.setInt(4, obj.getCopies());
+//Saving 
+			int i = ps.executeUpdate();
+
+			if(i == 1) {
+				System.out.println("Insertion Successfull");
+			}
+			else
+			{
+				System.out.println("Insertion Not Successfull");
+			}
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		
+	}
+
+//	
+//
+//
+//		for (BookDto book:obj)
+//		{
+//			if(book.getTitle().equals(obj1.getTitle()) && book.getAuthor().equals(obj1.getAuthor()))
+//				return null;
+//							
+//		}
+//		return obj1;
+//	}
 
 
 	}

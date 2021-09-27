@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface Searchable<T> {
   
-	 T search(List<T> obj,T obj1);
+	 public int countByCriteria(T obj);
 
 }

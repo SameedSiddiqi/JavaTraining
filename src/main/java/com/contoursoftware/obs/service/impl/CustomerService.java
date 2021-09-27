@@ -2,30 +2,45 @@ package main.java.com.contoursoftware.obs.service.impl;
 
 import java.util.List;
 
-import main.java.com.contoursoftware.obs.db.customer.dao.ListCustomerDAO;
+import main.java.com.contoursoftware.obs.db.customer.dao.DbCustomerDAO;
 import main.java.com.contoursoftware.obs.db.customer.dto.CustomerDto;
 
 
 public class CustomerService {
  
-	 ListCustomerDAO studentDAO=new ListCustomerDAO();
+	 DbCustomerDAO customerDao=new DbCustomerDAO();
+	 
 	 
 	 public void add(CustomerDto CustomerDto)
 	 {
-		 studentDAO.add(CustomerDto);
+		  int b1=customerDao.countByCriteria(CustomerDto);
+          System.out.println("b1 "+b1);
+          if (b1==0) {
+ 			 customerDao.add(CustomerDto);
+ 			 }		     		 
+          else
+         	 System.out.println("Multiple Books with same name cannot be added");         
 	 }
+	 
+	 
 	 public void delete(CustomerDto CustomerDto)
 	 {
-		 studentDAO.delete(CustomerDto);
+		 customerDao.delete(CustomerDto);
 	 }
 	 
 	 public List<CustomerDto> getStudent()
 	 {
-		return studentDAO.getAll();
+		return customerDao.getAll();
 	 }
 	 
 	 public void update(CustomerDto CustomerDto)
 	 {
-		 studentDAO.update(CustomerDto);
+		 customerDao.update(CustomerDto);
 	 }
+	 
+	 public void order(CustomerDto CustomerDto)
+	 {
+		 customerDao.order(CustomerDto);
+	 }
+	 
 }

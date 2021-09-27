@@ -1,4 +1,7 @@
-//package main.java.com.contoursoftware.lms;
+package main.java.com.contoursoftware.obs;
+import java.sql.Date;
+import java.sql.Timestamp;
+
 //
 //
 ////import java.util.ArrayList;
@@ -7,7 +10,15 @@
 //import main.java.com.contoursoftware.lms.ui.student.controller.StudentController;
 ////import main.java.com.contoursoftware.lms.ui.book.controller.BookConcrete;
 //
-//public class Test {
+public class Test {
+	
+	public static void main(String[] args) {
+	
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		//pst.setTimestamp(columIndex, new java.sql.Timestamp(date.getTime()));
+	System.out.println(timestamp);
+	}
+}
 //
 //	public static void main(String[] args) {
 //		
