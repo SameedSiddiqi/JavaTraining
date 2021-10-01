@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <display-name>OBS</display-name>
+  
+  
+<!--    A common error code, internal server error-->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/500.jsp</location>
+    </error-page>
+
+<!--    The famous 404 error-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.jsp</location>
+    </error-page>
+
+  
+<!--    Target a specific java exception-->
+    <error-page>
+        <exception-type>com.contoursoftware.obs.commons.utils.MultipleCredential</exception-type>
+        <location>/MultipleDbException.jsp</location>
+    </error-page>
+    
+    <error-page>
+        <exception-type>com.contoursoftware.obs.commons.utils.DbException</exception-type>
+        <location>/DbException.jsp</location>
+    </error-page>
+
+<!--    Setting the exception type to Throwable will make it target all exceptions-->
+    <error-page>
+        <exception-type>java.lang.NullPointerException</exception-type>
+        <location>/null-exception.jsp</location>
+    </error-page>
+
+</web-app>
