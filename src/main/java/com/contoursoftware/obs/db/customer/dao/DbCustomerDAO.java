@@ -16,14 +16,13 @@ import java.util.List;
 import com.contoursoftware.obs.commons.db.config.DatabaseConnection;
 import com.contoursoftware.obs.commons.db.dao.DataAccessObject;
 import com.contoursoftware.obs.commons.utils.DbException;
-import com.contoursoftware.obs.commons.utils.MultipleCredential;
 import com.contoursoftware.obs.commons.utils.Searchable;
 import com.contoursoftware.obs.db.book.dao.DbBookDao;
 import com.contoursoftware.obs.db.customer.dto.CustomerDto;
 
 public class DbCustomerDAO implements DataAccessObject<CustomerDto>,Searchable<CustomerDto> {
 	
-	Connection connection = DatabaseConnection.getConnection();
+	
 
 	private CustomerDto extractCustomerFromResultSet(ResultSet rs) throws SQLException {
 		CustomerDto customer=new CustomerDto();
@@ -68,8 +67,9 @@ public class DbCustomerDAO implements DataAccessObject<CustomerDto>,Searchable<C
 	
 	@Override
 
-	public void add(CustomerDto obj) throws DbException {
+	public void add(CustomerDto obj)  throws DbException {
 		try {
+			Connection connection = DatabaseConnection.getConnection();
 			PreparedStatement ps = connection.prepareStatement("INSERT INTO customer VALUES (default, ?, ?,?,?,?)");
 			ps.setString(1, obj.getName());
 			ps.setString(2, obj.getAddress());
@@ -94,9 +94,10 @@ public class DbCustomerDAO implements DataAccessObject<CustomerDto>,Searchable<C
 	}
 
 	@Override
-	public List<CustomerDto> getAll() {
+	public List<CustomerDto> getAll() throws DbException {
 		// TODO Auto-generated method stub
 		try {
+			Connection connection = DatabaseConnection.getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM customer");
 
@@ -120,8 +121,9 @@ public class DbCustomerDAO implements DataAccessObject<CustomerDto>,Searchable<C
 	}
 
 	@Override
-	public void update(CustomerDto obj) {
+	public void update(CustomerDto obj) throws DbException {
 		try {
+			Connection connection = DatabaseConnection.getConnection();
 			PreparedStatement ps = connection.prepareStatement("UPDATE customer SET name=? WHERE id=?");
 			ps.setString(1, obj.getName());
 			ps.setInt(2, obj.getId());
@@ -142,8 +144,9 @@ public class DbCustomerDAO implements DataAccessObject<CustomerDto>,Searchable<C
 	}
 
 	@Override
-	public void delete(CustomerDto obj) {
+	public void delete(CustomerDto obj) throws DbException {
 		try {
+			Connection connection = DatabaseConnection.getConnection();
 			Statement stmt = connection.createStatement();
 			int i = stmt.executeUpdate("DELETE FROM customer WHERE id=" + obj.getId());
 
@@ -161,9 +164,10 @@ public class DbCustomerDAO implements DataAccessObject<CustomerDto>,Searchable<C
 		}
 
 	@Override
-	public int countByCriteria(CustomerDto obj) {
+	public int countByCriteria(CustomerDto obj) throws DbException {
 		int j=0;
 				try {
+					Connection connection = DatabaseConnection.getConnection();
 					Statement stmt1 = connection.createStatement();
 					ResultSet rs1 = stmt1.executeQuery("SELECT count(*) FROM customer where name='"    +  obj.getName() + "' and email='"    +  obj.getEmail() + "'  ");
 					rs1.next();
@@ -180,7 +184,7 @@ public class DbCustomerDAO implements DataAccessObject<CustomerDto>,Searchable<C
  }
 	
 
-	public void order (CustomerDto obj)
+	public void order (CustomerDto obj) throws DbException
 	{
 		//LocalDateTime myTime2=LocalDateTime.now();
 		//DateTimeFormatter mytime3= DateTimeFormatter.ofPattern("YYYY-MM-DD hh:mm:ss");
@@ -195,6 +199,7 @@ public class DbCustomerDAO implements DataAccessObject<CustomerDto>,Searchable<C
 		
 		
 		try {
+			Connection connection = DatabaseConnection.getConnection();
 			int i;
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT id FROM customer where name= '"   +  obj.getName() + "'"); 
@@ -252,10 +257,11 @@ public class DbCustomerDAO implements DataAccessObject<CustomerDto>,Searchable<C
 		
 	}
 
-	public CustomerDto getCustomer(CustomerDto obj) {
+	public CustomerDto getCustomer(CustomerDto obj) throws DbException {
 		// TODO Auto-generated method stub
 		CustomerDto customer=null;
 		try {
+			Connection connection = DatabaseConnection.getConnection();
 			Statement stmt1 = connection.createStatement();
 			ResultSet rs1 = stmt1.executeQuery("SELECT * FROM customer where password='"    +  obj.getPassword() + "' and email='"    +  obj.getEmail() + "'  ");
 			 if(rs1.next())

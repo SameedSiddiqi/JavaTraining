@@ -13,13 +13,14 @@ import java.sql.Statement;
 
 import com.contoursoftware.obs.commons.db.config.DatabaseConnection;
 import com.contoursoftware.obs.commons.db.dao.DataAccessObject;
+import com.contoursoftware.obs.commons.utils.DbException;
 import com.contoursoftware.obs.commons.utils.Searchable;
 import com.contoursoftware.obs.db.book.dto.BookDto;
 
 
 public class DbBookDao implements DataAccessObject<BookDto>,Searchable<BookDto> {
 
-	Connection connection = DatabaseConnection.getConnection();
+	
 
 	private BookDto extractBookFromResultSet(ResultSet rs) throws SQLException {
 		BookDto book=new BookDto();
@@ -61,6 +62,7 @@ public class DbBookDao implements DataAccessObject<BookDto>,Searchable<BookDto> 
 	@Override
 	public void add(BookDto obj) {
 		try {
+			Connection connection = DatabaseConnection.getConnection();
 			PreparedStatement ps = connection.prepareStatement("INSERT INTO book VALUES (default, ?, ?,?)");
 			ps.setString(1, obj.getTitle());
 			ps.setString(2, obj.getAuthor());
@@ -83,7 +85,7 @@ public class DbBookDao implements DataAccessObject<BookDto>,Searchable<BookDto> 
 	}
 
 	@Override
-	public List<BookDto> getAll() {
+	public List<BookDto> getAll() throws DbException {
 		// TODO Auto-generated method stub
 		try {
 			Connection connection = DatabaseConnection.getConnection();
@@ -103,11 +105,10 @@ public class DbBookDao implements DataAccessObject<BookDto>,Searchable<BookDto> 
 			
 		}
 
-		 catch (SQLException ex) {
-			ex.printStackTrace();
+		catch (SQLException ex) {
+			throw new DbException(ex);
 		}
 
-		return null;
 	}
 
 	@Override

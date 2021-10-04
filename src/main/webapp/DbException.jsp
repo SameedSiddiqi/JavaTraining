@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" isErrorPage="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,5 +13,6 @@
   margin-right: auto;
   width: 25%;" >
 <p style="text-align:center">Database is under maintainence, try again later </p>
+<font color="red">Error: <%=exception.getMessage() %></font><br>
 </body>
 </html>

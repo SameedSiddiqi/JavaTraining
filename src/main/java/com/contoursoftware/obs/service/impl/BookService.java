@@ -34,6 +34,7 @@ package com.contoursoftware.obs.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.contoursoftware.obs.commons.utils.DbException;
 import com.contoursoftware.obs.db.book.dao.DbBookDao;
 import com.contoursoftware.obs.db.book.dao.ListBookDAO;
 import com.contoursoftware.obs.db.book.dto.BookDto;
@@ -62,7 +63,7 @@ public class BookService {
 		 dbBookDAO.delete(bookDto);
 	 }
 	 
-	 public List<BookDto> getBook()
+	 public List<BookDto> getBook() throws DbException
 	 {
 		 
 		

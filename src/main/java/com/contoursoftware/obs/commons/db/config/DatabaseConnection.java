@@ -4,7 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.contoursoftware.obs.commons.utils.MultipleCredential;
+import com.contoursoftware.obs.commons.utils.AlreadyExistException;
+import com.contoursoftware.obs.commons.utils.DbException;
 
 
 public class DatabaseConnection  {
@@ -26,7 +27,7 @@ public class DatabaseConnection  {
 	return instance;
 	}
 
-	public static Connection getConnection() {
+	public static  Connection getConnection() throws DbException {
 
 
 	if(connect == null)
@@ -38,7 +39,7 @@ public class DatabaseConnection  {
 
 	}
 	catch(Exception e) {
-	System.out.println(e);
+	throw new DbException();
 	}
 	}
 

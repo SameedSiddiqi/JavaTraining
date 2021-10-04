@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.contoursoftware.obs.commons.utils.DbException;
 import com.contoursoftware.obs.db.book.dto.BookDto;
 import com.contoursoftware.obs.service.impl.BookService;
 
@@ -37,11 +38,17 @@ public class AdminGetBookServlet extends HttpServlet {
       BookService bookservice= new BookService();
 		
 		List<BookDto> list= new ArrayList<BookDto>();
-		list = bookservice.getBook();
+		try {
+			list = bookservice.getBook();
+			request.setAttribute("data", list);
+			RequestDispatcher rd= request.getRequestDispatcher("home.jsp");
+			rd.forward(request, response);
+			
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			throw new ServletException(e);
+		}
 		
-		request.setAttribute("data", list);
-		RequestDispatcher rd= request.getRequestDispatcher("home.jsp");
-		rd.forward(request, response);
 	}
 
 	/**

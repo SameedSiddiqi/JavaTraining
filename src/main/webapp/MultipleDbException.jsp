@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" isErrorPage="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +7,6 @@
 <title>Dual Exception</title>
 </head>
 <body>
-   Multiple Users with same credentials entered
+     <font color="red">Error: <%=exception.getMessage() %></font><br>
 </body>
 </html>

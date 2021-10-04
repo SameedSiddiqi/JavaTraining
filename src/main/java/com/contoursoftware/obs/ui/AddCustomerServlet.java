@@ -1,6 +1,8 @@
 package com.contoursoftware.obs.ui;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.contoursoftware.obs.commons.utils.DbException;
-import com.contoursoftware.obs.commons.utils.MultipleCredential;
+import com.contoursoftware.obs.commons.utils.AlreadyExistException;
 import com.contoursoftware.obs.db.customer.dto.CustomerDto;
 import com.contoursoftware.obs.service.impl.CustomerService;
 
@@ -60,16 +62,19 @@ public class AddCustomerServlet extends HttpServlet {
 			customerService.add(customer);
 			HttpSession session=request.getSession();  
 	        session.setAttribute("success","1"); 
-		} catch (MultipleCredential e) {
-			// TODO Auto-generated catch block
-		     throw new ServletException(e);
-		}
-		catch (DbException e) {
-			// TODO Auto-generated catch block
-		     throw new ServletException(e);
+	        response.sendRedirect("login.jsp");
+		} 
+		catch (AlreadyExistException e) {
+			request.setAttribute("data", e.getMessage());
+			RequestDispatcher rd= request.getRequestDispatcher("register.jsp");
+			rd.forward(request, response);
+		} catch (DbException e) {
+			throw new ServletException(e);
 		}
 		
-		response.sendRedirect("login.jsp");
+		//response.sendRedirect("login.jsp");
+		//RequestDispatcher rd= request.getRequestDispatcher("register.jsp");
+		//rd.forward(request, response);
 	}
 	
 

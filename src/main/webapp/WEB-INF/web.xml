@@ -17,10 +17,10 @@
 
   
 <!--    Target a specific java exception-->
-    <error-page>
-        <exception-type>com.contoursoftware.obs.commons.utils.MultipleCredential</exception-type>
-        <location>/MultipleDbException.jsp</location>
-    </error-page>
+ <!--    <error-page>
+        <exception-type>com.contoursoftware.obs.commons.utils.AlreadyExistException</exception-type>
+        <location>/register.jsp</location>
+    </error-page>-->
     
     <error-page>
         <exception-type>com.contoursoftware.obs.commons.utils.DbException</exception-type>

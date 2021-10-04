@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.contoursoftware.obs.commons.utils.DbException;
 import com.contoursoftware.obs.db.customer.dto.CustomerDto;
 import com.contoursoftware.obs.service.impl.CustomerService;
 
@@ -48,17 +49,23 @@ public class LoginCustomerServlet extends HttpServlet {
 		
 		CustomerService customerService=new CustomerService();
 		CustomerDto customer1 =new CustomerDto();
-		customer1 = customerService.loginCustomer(customer);
+		try {
+			customer1 = customerService.loginCustomer(customer);
+			if(customer1!=null)
+			{
+				HttpSession session=request.getSession();  
+		        session.setAttribute("name",customer1.getName()); 
+		        response.sendRedirect("/OBS/home");
+			}
+			else
+				 response.sendRedirect("login.jsp");
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			throw new ServletException(e);
+		}
 		System.out.println(customer1);
 		
-		if(customer1!=null)
-		{
-			HttpSession session=request.getSession();  
-	        session.setAttribute("name",customer1.getName()); 
-	        response.sendRedirect("/OBS/home");
-		}
-		else
-			 response.sendRedirect("login.jsp");
+		
 			
 		
 	}

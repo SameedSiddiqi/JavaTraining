@@ -10,12 +10,13 @@ import java.util.List;
 
 import com.contoursoftware.obs.commons.db.config.DatabaseConnection;
 import com.contoursoftware.obs.commons.db.dao.DataAccessObject;
+import com.contoursoftware.obs.commons.utils.DbException;
 import com.contoursoftware.obs.db.book.dto.BookDto;
 import com.contoursoftware.obs.db.category.dto.CategoryDto;
 
 public class DbBookCategoryDao implements  DataAccessObject<BookDto> {
 	
-	Connection connection = DatabaseConnection.getConnection();
+
 	
 	private BookDto extractBookFromResultSet(ResultSet rs) throws SQLException {
 		List<CategoryDto> list=new ArrayList<CategoryDto>();
@@ -34,8 +35,9 @@ public class DbBookCategoryDao implements  DataAccessObject<BookDto> {
 	}
 
 	@Override
-	public void add(BookDto obj) {
+	public void add(BookDto obj) throws DbException {
 		try {
+			Connection connection = DatabaseConnection.getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT id FROM book where title= '"    +  obj.getTitle() + "'");
 			rs.next();
