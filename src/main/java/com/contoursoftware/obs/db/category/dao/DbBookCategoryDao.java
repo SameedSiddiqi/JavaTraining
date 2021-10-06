@@ -69,8 +69,9 @@ public class DbBookCategoryDao implements  DataAccessObject<BookDto> {
 	}
 
 	@Override
-	public List<BookDto> getAll() {
+	public List<BookDto> getAll() throws DbException {
 		try {
+			Connection connection = DatabaseConnection.getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("Select b.*,c.* from book b Join book_category bc on b.id=bc.b_id join category  c on c.id=bc.c_id;");
 

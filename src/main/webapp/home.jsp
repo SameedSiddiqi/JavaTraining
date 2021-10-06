@@ -10,7 +10,7 @@
    <title>Book List</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   </head>
-  <body>
+  <body >
   
   <nav class="navbar navbar-expand-lg navbar-light bg-info bg-gradient">
   <div class="container-fluid">
@@ -57,17 +57,17 @@
   </div>
 </nav>
  
- <div class="container-fluid  mt-3 ">
-  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+<div class="container-fluid mt-3">
+  <div id="carouselExampleControls" class="carousel slide carousel-fade" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active ">
-      <img src="resources/book1.jpg "  width="2000"  height="600"  alt="...">
+      <img src="resources/book1.jpg "  class="d-block w-100 " height=800  alt="...">
     </div>
     <div class="carousel-item ">
-      <img src="resources/book2.jpg"  width="2000" height="600" alt="...">
+      <img src="resources/book2.jpg" class="d-block w-100 " height=800  alt="...">
     </div>
     <div class="carousel-item  ">
-      <img src="resources/book3.jpg"  width="2000" height="600" alt="...">
+      <img src="resources/book3.jpg"  class="d-block w-100 "height=800  alt="...">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -81,7 +81,9 @@
 </div>
 </div>
 
-<div class="container mt-5">
+
+<div class="container mt-5" style="background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,28,0.6054796918767507) 57%, rgba(0,212,255,1) 100%);">
      <h1 style="text-align:center">Displaying Book List</h1>                                                                                     
   <div class="table-responsive table-bordered ">          
   <table class="table">

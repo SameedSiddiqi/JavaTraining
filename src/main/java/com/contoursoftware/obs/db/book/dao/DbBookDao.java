@@ -60,7 +60,7 @@ public class DbBookDao implements DataAccessObject<BookDto>,Searchable<BookDto> 
 	//	      }
 	//	   }
 	@Override
-	public void add(BookDto obj) {
+	public void add(BookDto obj) throws DbException {
 		try {
 			Connection connection = DatabaseConnection.getConnection();
 			PreparedStatement ps = connection.prepareStatement("INSERT INTO book VALUES (default, ?, ?,?)");
@@ -112,8 +112,9 @@ public class DbBookDao implements DataAccessObject<BookDto>,Searchable<BookDto> 
 	}
 
 	@Override
-	public void update(BookDto obj) {
+	public void update(BookDto obj) throws DbException {
 		try {
+			Connection connection = DatabaseConnection.getConnection();
 			PreparedStatement ps = connection.prepareStatement("UPDATE book SET author=? WHERE id=?");
 			ps.setString(1, obj.getAuthor());
 			ps.setInt(2, obj.getId());
@@ -134,8 +135,9 @@ public class DbBookDao implements DataAccessObject<BookDto>,Searchable<BookDto> 
 	}
 
 	@Override
-	public void delete(BookDto obj) {
+	public void delete(BookDto obj) throws DbException {
 		try {
+			Connection connection = DatabaseConnection.getConnection();
 			Statement stmt = connection.createStatement();
 			int i = stmt.executeUpdate("DELETE FROM book WHERE id=" + obj.getId());
 
@@ -153,9 +155,10 @@ public class DbBookDao implements DataAccessObject<BookDto>,Searchable<BookDto> 
 		}
 
 	@Override
-	public int countByCriteria(BookDto obj) {
+	public int countByCriteria(BookDto obj) throws DbException {
 		int j=0;
 				try {
+					Connection connection = DatabaseConnection.getConnection();
 					Statement stmt1 = connection.createStatement();
 					ResultSet rs1 = stmt1.executeQuery("SELECT count(*) FROM book where title='"    +  obj.getTitle() + "' and author='"    +  obj.getAuthor() + "'  ");
 					rs1.next();
@@ -172,8 +175,9 @@ public class DbBookDao implements DataAccessObject<BookDto>,Searchable<BookDto> 
 		
 	}
 
-	public void orderDetail(int id, BookDto obj) {
+	public void orderDetail(int id, BookDto obj) throws DbException {
 		try {
+			Connection connection = DatabaseConnection.getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT id FROM book where title= '"   +  obj.getTitle() + "'");
 			rs.next();
